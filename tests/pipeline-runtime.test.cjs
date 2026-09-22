@@ -346,6 +346,42 @@ test("startup warms conversion, arms capture, then opens output only after engag
   assert.equal(runtime.snapshot().state, "stopped");
 });
 
+test("accepted source and converted output expose real timing to non-audio observers", async () => {
+  const fixture = adapters();
+  const observations = [];
+  let now = 1_000;
+  const originalPrepare = fixture.value.engine.prepare;
+  fixture.value.engine.prepare = async (...args) => {
+    const session = await originalPrepare(...args);
+    const convert = session.convert;
+    session.convert = async (frame) => {
+      now += 143;
+      return convert(frame);
+    };
+    return session;
+  };
+  const runtime = new PipelineRuntime({
+    ...fixture.value,
+    now: () => now,
+    onInputFrame: (frame, context) => observations.push({ kind: "source", frame, context }),
+    onOutputFrame: (frame, source, context) => observations.push({ kind: "output", frame, source, context }),
+  });
+  await runtime.start({});
+  const input = sourceFrame(41);
+  fixture.emitFrame(input);
+  await runtime.frameQueue;
+
+  assert.equal(observations.length, 2);
+  assert.equal(observations[0].kind, "source");
+  assert.equal(observations[0].frame, input);
+  assert.equal(observations[0].context.acceptedAtMs, 1_000);
+  assert.equal(observations[0].context.durationMs, 10);
+  assert.equal(observations[1].kind, "output");
+  assert.equal(observations[1].source, input);
+  assert.equal(observations[1].context.latencyMs, 143);
+  await runtime.stop();
+});
+
 test("armed passthrough does not start playback and can follow repeated voice sessions", async () => {
   const log = [];
   const fixture = adapters({ initialRouteState: "armed", log });

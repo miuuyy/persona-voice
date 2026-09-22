@@ -19,6 +19,7 @@ import { errorMessage, type SettingsSectionId } from "./lib/presentation";
 import { HistoryPage } from "./pages/HistoryPage";
 import { HomePage } from "./pages/HomePage";
 import { SettingsPage } from "./pages/SettingsPage";
+import { VisualizerPage } from "./pages/VisualizerPage";
 
 export function App() {
   const api = window.codexPersonaVoice;
@@ -113,6 +114,9 @@ export function App() {
         event.preventDefault();
         setActiveTab("home");
       } else if (command && event.key === "2") {
+        event.preventDefault();
+        setActiveTab("visualizer");
+      } else if (command && event.key === "3") {
         event.preventDefault();
         setActiveTab("history");
       } else if (event.key === "Escape" && confirmClear) {
@@ -296,7 +300,7 @@ export function App() {
           onToggle={() => setSidebarCollapsed((value) => !value)}
           snapshot={snapshot}
         />
-        <main className="workspace">
+        <main className={`workspace${activeTab === "visualizer" ? " workspace-visualizer" : ""}`}>
           <WorkspaceToolbar active={activeTab} snapshot={snapshot} />
           {activeTab === "home" ? (
             <HomePage
@@ -320,6 +324,9 @@ export function App() {
               playingKey={playingKey}
               snapshot={snapshot}
             />
+          ) : null}
+          {activeTab === "visualizer" ? (
+            <VisualizerPage bridge={bridge} snapshot={snapshot} />
           ) : null}
           {activeTab === "settings" ? (
             <SettingsPage

@@ -2,6 +2,8 @@
   const snapshotListeners = new Set();
   const runtimeListeners = new Set();
   const updateListeners = new Set();
+  const visualizerListeners = new Set();
+  let visualizerTimer = null;
   const state = {
     app: { name: "Codex Persona Voice", version: "0.1.0", platform: "darwin", packaged: true },
     onboarding: { complete: true, githubOpened: true, xOpened: true },
@@ -95,6 +97,22 @@
   const publish = () => snapshotListeners.forEach((listener) => listener(clone(state)));
   window.codexPersonaVoice = {
     snapshot: async () => clone(state),
+    setVisualizerActive: async (active) => {
+      if (visualizerTimer) clearInterval(visualizerTimer);
+      visualizerTimer = null;
+      if (active) {
+        visualizerListeners.forEach((listener) => listener({ type: "reset", atMs: Date.now() }));
+        visualizerTimer = setInterval(() => {
+          const now = Date.now();
+          const phase = now / 180;
+          const samples = Array.from({ length: 4 }, (_, index) =>
+            Math.max(0.06, Math.abs(Math.sin(phase + index * 0.68)) * 0.72));
+          visualizerListeners.forEach((listener) => listener({ type: "frame", stream: "source", startAtMs: now - 40, intervalMs: 10, samples, pipelineLatencyMs: null, inferenceMs: null }));
+          visualizerListeners.forEach((listener) => listener({ type: "frame", stream: "converted", startAtMs: now + 165, intervalMs: 10, samples: samples.map((value) => Math.min(1, value * 0.92)), pipelineLatencyMs: 184.2, inferenceMs: 155.8 }));
+        }, 40);
+      }
+      return active;
+    },
     openSocial: async (target) => { state.onboarding[target === "github" ? "githubOpened" : "xOpened"] = true; publish(); return clone(state.onboarding); },
     completeOnboarding: async () => { state.onboarding.complete = true; publish(); return clone(state.onboarding); },
     refreshReadiness: async () => clone(state.runtime),
@@ -131,6 +149,7 @@
     windowState: async () => ({ fullScreen: false, maximized: false }),
     windowControl: () => {},
     onSnapshot: (listener) => { snapshotListeners.add(listener); return () => snapshotListeners.delete(listener); },
+    onVisualizerFrame: (listener) => { visualizerListeners.add(listener); return () => visualizerListeners.delete(listener); },
     onRuntime: (listener) => { runtimeListeners.add(listener); return () => runtimeListeners.delete(listener); },
     onUpdateState: (listener) => { updateListeners.add(listener); return () => updateListeners.delete(listener); },
     onWindowState: () => () => {},

@@ -30,6 +30,24 @@ Persona Voice 是一款桌面应用，可将 ChatGPT、Codex 或 Grok Bot 的语
 声音。只需选择一次来源应用；对话和控制仍保留在原应用中，语音转换则在本设备上运行。
 输出质量与时序会因硬件、输入音频和所选参考而异。
 
+## 演示
+
+<table>
+<tr><th width="50%">Grok Bot</th><th width="50%">Codex</th></tr>
+<tr>
+<td>
+
+https://github.com/user-attachments/assets/defa32ef-e47f-46c1-bacf-23c7b1ba8a52
+
+</td>
+<td>
+
+https://github.com/user-attachments/assets/f43f9f90-a76f-4984-b061-145aa7db5467
+
+</td>
+</tr>
+</table>
+
 ## 语音模型
 
 首次设置只需下载一个模型，之后可在 **设置 → 语音模型** 中安装另一个。
@@ -79,10 +97,6 @@ Persona Voice 会在所选应用、本地引擎和输出路由全部就绪后才
 
 详细内容参见[架构](docs/ARCHITECTURE.md)、[原生协议](docs/NATIVE_PROTOCOL.md)和
 [引擎契约](docs/ENGINE_CONTRACT.md)。
-
-## 演示
-
-https://github.com/user-attachments/assets/f43f9f90-a76f-4984-b061-145aa7db5467
 
 ## 快速开始
 

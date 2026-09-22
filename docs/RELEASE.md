@@ -1,5 +1,11 @@
 # Release engineering
 
+## v0.2.0: Grok Bot and Live visualization
+
+This release adds Grok Bot as a selectable voice source and a Live view showing original and
+converted waveforms, model processing time, and installed package size. The owner confirmed
+live use on their Mac; this does not extend the physical-host acceptance matrix below.
+
 ## Model integration in v0.1.6
 
 The v0.1.6 preview release adds Chatterbox on Apple Silicon, keeps Seed-VC on existing installations,
@@ -11,7 +17,7 @@ Local verification includes renderer/IPC setup scenarios with isolated data and 
 model-free Python contracts, existing Node/native checks, and a local macOS package. Production
 signing/notarization and clean-host qualification below remain release gates for this preview.
 
-Status: `v0.1.6` is the preview release for macOS, Windows, and Linux. Windows uses VB-CABLE as a
+Status: `v0.2.0` is the preview release for macOS, Windows, and Linux. Windows uses VB-CABLE as a
 separately installed prerequisite and still needs broader physical-host acceptance.
 
 The repository contains complete live-accepted source paths for Apple Silicon macOS and NVIDIA
@@ -39,7 +45,7 @@ Implementation and development evidence do not complete distribution qualificati
 
 ## GitHub Releases update channel
 
-Packaged launchers check `miuuyy/ChatGPT-Persona-Voice` once at startup. Development runs do not use
+Packaged launchers check `miuuyy/persona-voice` once at startup. Development runs do not use
 the update channel. A newer release is offered only when:
 
 1. the latest tag is valid semver and newer than the packaged version;
@@ -187,7 +193,7 @@ Final artifacts must deliver and audit:
 
 ## Versioning
 
-The package currently reports `0.1.6`; publication requires the exact matching `v0.1.6` tag (or the
+The package currently reports `0.2.0`; publication requires the exact matching `v0.2.0` tag (or the
 matching future version). Until a public compatibility contract exists, CPV1, CPVE, settings, route
 policy, and adapter changes may be breaking and must be called out in release notes.
 

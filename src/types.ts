@@ -1,6 +1,6 @@
 import type { UiLocale } from "./i18n";
 
-export type TabId = "home" | "history" | "settings";
+export type TabId = "home" | "visualizer" | "history" | "settings";
 export type SourceMode = "codex-app-server" | "desktop-application";
 export type TargetApp = "chatgpt" | "grok-bot";
 export type VoiceModelId = "seed-vc" | "chatterbox";
@@ -199,6 +199,18 @@ export interface VoicePreset {
   referenceSha256: string;
 }
 
+export type WaveformTelemetry =
+  | { type: "reset"; atMs: number }
+  | {
+      type: "frame";
+      stream: "source" | "converted";
+      startAtMs: number;
+      intervalMs: number;
+      samples: number[];
+      pipelineLatencyMs: number | null;
+      inferenceMs: number | null;
+    };
+
 export interface AudioSource {
   id: string;
   name: string;
@@ -208,6 +220,7 @@ export interface AudioSource {
 
 export interface VoiceBridge {
   snapshot(): Promise<LauncherSnapshot>;
+  setVisualizerActive(active: boolean): Promise<boolean>;
   openSocial(target: "github" | "x"): Promise<OnboardingState>;
   completeOnboarding(): Promise<OnboardingState>;
   refreshReadiness(): Promise<RuntimeSnapshot>;
@@ -242,6 +255,7 @@ export interface VoiceBridge {
   windowState(): Promise<{ fullScreen: boolean; maximized: boolean }>;
   windowControl(action: "close" | "minimize" | "zoom"): void;
   onSnapshot(listener: (snapshot: LauncherSnapshot) => void): () => void;
+  onVisualizerFrame(listener: (frame: WaveformTelemetry) => void): () => void;
   onRuntime(listener: (runtime: RuntimeSnapshot) => void): () => void;
   onUpdateState(listener: (state: UpdateState) => void): () => void;
   onWindowState(listener: (state: { fullScreen: boolean; maximized: boolean }) => void): () => void;

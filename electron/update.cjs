@@ -8,7 +8,7 @@ const path = require("node:path");
 const { spawn, spawnSync } = require("node:child_process");
 const { pipeline } = require("node:stream/promises");
 
-const REPOSITORY = "miuuyy/ChatGPT-Persona-Voice";
+const REPOSITORY = "miuuyy/persona-voice";
 const RELEASE_API_URL = `https://api.github.com/repos/${REPOSITORY}/releases/latest`;
 const USER_AGENT = "codex-persona-voice-updater";
 const CHECKSUM_ASSET = "SHA256SUMS";

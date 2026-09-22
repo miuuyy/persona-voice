@@ -31,6 +31,24 @@ Select the source application once; its conversation and controls stay untouched
 runs locally on your device. Output quality and timing vary with the hardware, source audio, and
 selected reference.
 
+## Demos
+
+<table>
+<tr><th width="50%">Grok Bot</th><th width="50%">Codex</th></tr>
+<tr>
+<td>
+
+https://github.com/user-attachments/assets/defa32ef-e47f-46c1-bacf-23c7b1ba8a52
+
+</td>
+<td>
+
+https://github.com/user-attachments/assets/f43f9f90-a76f-4984-b061-145aa7db5467
+
+</td>
+</tr>
+</table>
+
 ## Voice models
 
 Download one model during first-run setup, then add the other later in **Settings → Voice model**.
@@ -81,10 +99,6 @@ the original playback. If the route cannot be established safely, conversion doe
 
 Read the full [architecture](docs/ARCHITECTURE.md), [native protocol](docs/NATIVE_PROTOCOL.md),
 and [engine contract](docs/ENGINE_CONTRACT.md).
-
-## Demo
-
-https://github.com/user-attachments/assets/f43f9f90-a76f-4984-b061-145aa7db5467
 
 ## Quick start
 

@@ -31,6 +31,24 @@ Persona Voice は、ChatGPT、Codex、Grok Bot の読み上げ音声を選んだ
 音声変換はこのデバイス上で実行されます。品質とタイミングは、ハードウェア、入力音声、
 選択した参照音声によって変わります。
 
+## デモ
+
+<table>
+<tr><th width="50%">Grok Bot</th><th width="50%">Codex</th></tr>
+<tr>
+<td>
+
+https://github.com/user-attachments/assets/defa32ef-e47f-46c1-bacf-23c7b1ba8a52
+
+</td>
+<td>
+
+https://github.com/user-attachments/assets/f43f9f90-a76f-4984-b061-145aa7db5467
+
+</td>
+</tr>
+</table>
+
 ## 音声モデル
 
 初回設定ではモデルを1つダウンロードします。もう一方は後から **設定 → 音声モデル** で
@@ -81,10 +99,6 @@ Persona Voice は、選択したアプリ、ローカルエンジン、出力経
 
 詳しくは[アーキテクチャ](docs/ARCHITECTURE.md)、[ネイティブプロトコル](docs/NATIVE_PROTOCOL.md)、
 [エンジン契約](docs/ENGINE_CONTRACT.md)を参照してください。
-
-## デモ
-
-https://github.com/user-attachments/assets/f43f9f90-a76f-4984-b061-145aa7db5467
 
 ## クイックスタート
 

@@ -179,6 +179,9 @@ export function WorkspaceToolbar({
   snapshot: LauncherSnapshot;
 }) {
   const { messages } = useI18n();
+  if (active === "visualizer") {
+    return <header aria-hidden="true" className="workspace-toolbar draggable" />;
+  }
   const title =
     active === "home"
       ? messages.sidebar.voice

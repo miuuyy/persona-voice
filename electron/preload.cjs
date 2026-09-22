@@ -11,6 +11,7 @@ function subscription(channel, listener) {
 
 contextBridge.exposeInMainWorld("codexPersonaVoice", {
   snapshot: () => ipcRenderer.invoke("voice:snapshot"),
+  setVisualizerActive: (active) => ipcRenderer.invoke("voice:visualizer-active", active),
   openSocial: (target) => ipcRenderer.invoke("voice:open-social", target),
   completeOnboarding: () => ipcRenderer.invoke("voice:complete-onboarding"),
   refreshReadiness: () => ipcRenderer.invoke("voice:refresh-readiness"),
@@ -42,6 +43,7 @@ contextBridge.exposeInMainWorld("codexPersonaVoice", {
   windowState: () => ipcRenderer.invoke("voice:window-state"),
   windowControl: (action) => ipcRenderer.send("voice:window-control", action),
   onSnapshot: (listener) => subscription("voice:snapshot-changed", listener),
+  onVisualizerFrame: (listener) => subscription("voice:visualizer-frame", listener),
   onRuntime: (listener) => subscription("voice:runtime-changed", listener),
   onUpdateState: (listener) => subscription("voice:update-state", listener),
   onWindowState: (listener) => subscription("voice:window-state-changed", listener),

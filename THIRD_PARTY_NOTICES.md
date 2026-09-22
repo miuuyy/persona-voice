@@ -9,6 +9,13 @@ Inclusion here records provenance and redistribution information; it does not gr
 publicity, personality, character, or other rights beyond the identified upstream terms. Users and
 redistributors remain responsible for the law and terms that apply to their use.
 
+## Source application icons
+
+`src/assets/apps/chatgpt.png` and `src/assets/apps/grok-bot.png` are reduced-size copies of
+the respective macOS application icons, used to identify the selected audio source.
+These marks belong to their respective owners and are not covered by this project's MIT license.
+Their use does not imply affiliation or endorsement.
+
 ## Persona-derived Core Audio discovery
 
 The initial macOS Core Audio process-object discovery and private aggregate-device setup in

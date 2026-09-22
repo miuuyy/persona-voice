@@ -12,7 +12,8 @@ export function primaryTabs(messages: Messages): Array<{
   icon: IconName;
 }> {
   return [
-    { id: "home", label: messages.sidebar.voice, icon: "waveform" },
+    { id: "home", label: messages.sidebar.voice, icon: "microphone" },
+    { id: "visualizer", label: messages.sidebar.visualizer, icon: "waveform" },
     { id: "history", label: messages.sidebar.history, icon: "history" },
   ];
 }

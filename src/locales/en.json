@@ -33,10 +33,19 @@
     "collapse": "Collapse sidebar",
     "mainNavigation": "Main navigation",
     "voice": "Voice",
+    "visualizer": "Live",
     "history": "History",
     "settings": "Settings",
     "updateTo": "Update to v{version}",
     "updating": "Updating…"
+  },
+  "visualizer": {
+    "source": "{app} · source",
+    "converted": "{voice} · converted",
+    "original": "Original voice",
+    "output": "Converted voice",
+    "waiting": "Waiting for audio",
+    "inference": "{milliseconds} ms processing"
   },
   "onboarding": {
     "targetStep": "Step 1 of 3",

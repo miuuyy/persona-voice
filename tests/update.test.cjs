@@ -32,7 +32,7 @@ test("release selection binds strict versions, platform assets, checksums, signa
   const checksums = `${hash}  launcher.zip\n`;
   assert.equal(expectedChecksum(checksums, "launcher.zip"), hash);
   assert.throws(() => expectedChecksum(`${hash}  other.zip\n`, "launcher.zip"), /no entry/);
-  const url = "https://github.com/miuuyy/ChatGPT-Persona-Voice/releases/download/v1.2.0/launcher.zip";
+  const url = "https://github.com/miuuyy/persona-voice/releases/download/v1.2.0/launcher.zip";
   assert.equal(validateReleaseAssetUrl(url, "1.2.0", "launcher.zip"), url);
   assert.throws(
     () => validateReleaseAssetUrl("https://example.com/launcher.zip", "1.2.0", "launcher.zip"),
@@ -135,15 +135,15 @@ test("startup check runs once and exposes only a newer complete release", async 
           assets: [
             {
               name: "codex-persona-voice-1.2.0-linux-x64.AppImage",
-              browser_download_url: "https://github.com/miuuyy/ChatGPT-Persona-Voice/releases/download/v1.2.0/codex-persona-voice-1.2.0-linux-x64.AppImage",
+              browser_download_url: "https://github.com/miuuyy/persona-voice/releases/download/v1.2.0/codex-persona-voice-1.2.0-linux-x64.AppImage",
             },
             {
               name: "SHA256SUMS",
-              browser_download_url: "https://github.com/miuuyy/ChatGPT-Persona-Voice/releases/download/v1.2.0/SHA256SUMS",
+              browser_download_url: "https://github.com/miuuyy/persona-voice/releases/download/v1.2.0/SHA256SUMS",
             },
             {
               name: "SHA256SUMS.sig",
-              browser_download_url: "https://github.com/miuuyy/ChatGPT-Persona-Voice/releases/download/v1.2.0/SHA256SUMS.sig",
+              browser_download_url: "https://github.com/miuuyy/persona-voice/releases/download/v1.2.0/SHA256SUMS.sig",
             },
           ],
         };
@@ -185,15 +185,15 @@ test("verified update is handed to one detached worker", async (t) => {
         assets: [
           {
             name: "codex-persona-voice-1.2.0-linux-x64.AppImage",
-            browser_download_url: "https://github.com/miuuyy/ChatGPT-Persona-Voice/releases/download/v1.2.0/codex-persona-voice-1.2.0-linux-x64.AppImage",
+            browser_download_url: "https://github.com/miuuyy/persona-voice/releases/download/v1.2.0/codex-persona-voice-1.2.0-linux-x64.AppImage",
           },
           {
             name: "SHA256SUMS",
-            browser_download_url: "https://github.com/miuuyy/ChatGPT-Persona-Voice/releases/download/v1.2.0/SHA256SUMS",
+            browser_download_url: "https://github.com/miuuyy/persona-voice/releases/download/v1.2.0/SHA256SUMS",
           },
           {
             name: "SHA256SUMS.sig",
-            browser_download_url: "https://github.com/miuuyy/ChatGPT-Persona-Voice/releases/download/v1.2.0/SHA256SUMS.sig",
+            browser_download_url: "https://github.com/miuuyy/persona-voice/releases/download/v1.2.0/SHA256SUMS.sig",
           },
         ],
       }),

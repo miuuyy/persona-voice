@@ -1,17 +1,17 @@
 {
   "name": "codex-persona-voice",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "private": true,
   "description": "Local-first realtime voice relay for ChatGPT, Codex, and Grok Bot",
   "author": "miuuyy",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/miuuyy/ChatGPT-Persona-Voice.git"
+    "url": "git+https://github.com/miuuyy/persona-voice.git"
   },
-  "homepage": "https://github.com/miuuyy/ChatGPT-Persona-Voice#readme",
+  "homepage": "https://github.com/miuuyy/persona-voice#readme",
   "bugs": {
-    "url": "https://github.com/miuuyy/ChatGPT-Persona-Voice/issues"
+    "url": "https://github.com/miuuyy/persona-voice/issues"
   },
   "keywords": [
     "voice-conversion",

@@ -33,10 +33,19 @@
     "collapse": "收起侧栏",
     "mainNavigation": "主导航",
     "voice": "语音",
+    "visualizer": "实时",
     "history": "历史",
     "settings": "设置",
     "updateTo": "更新到 v{version}",
     "updating": "正在更新…"
+  },
+  "visualizer": {
+    "source": "{app} · 输入",
+    "converted": "{voice} · 转换后",
+    "original": "原声",
+    "output": "转换后声音",
+    "waiting": "等待音频",
+    "inference": "处理用时 {milliseconds} 毫秒"
   },
   "onboarding": {
     "targetStep": "第 1 步，共 3 步",

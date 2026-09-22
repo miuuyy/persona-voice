@@ -87,6 +87,8 @@ class PipelineRuntime extends EventEmitter {
     maxQueuedAudioMs = MAX_QUEUED_AUDIO_MS,
     maxOutputFrameMs = 40,
     shutdownDrainTimeoutMs = 5_000,
+    now = () => Date.now(),
+    onInputFrame = () => {},
     onOutputFrame = async () => {},
   }) {
     super();
@@ -105,6 +107,8 @@ class PipelineRuntime extends EventEmitter {
     this.maxQueuedAudioMs = maxQueuedAudioMs;
     this.maxOutputFrameMs = maxOutputFrameMs;
     this.shutdownDrainTimeoutMs = shutdownDrainTimeoutMs;
+    this.now = now;
+    this.onInputFrame = onInputFrame;
     this.onOutputFrame = onOutputFrame;
     this.startupError = null;
     this.faultPromise = null;
@@ -411,6 +415,8 @@ class PipelineRuntime extends EventEmitter {
       return;
     }
     this.queuedAudioMs += durationMs;
+    const acceptedAtMs = this.now();
+    this.onInputFrame(frame, { acceptedAtMs, durationMs });
     let failure = null;
     this.processingQueue = this.processingQueue
       .then(async () => {
@@ -430,7 +436,9 @@ class PipelineRuntime extends EventEmitter {
             );
           }
           await this.sessions.output.write(outputFrame);
-          await this.onOutputFrame(outputFrame, frame);
+          await this.onOutputFrame(outputFrame, frame, {
+            latencyMs: Math.max(0, this.now() - acceptedAtMs),
+          });
         }
       })
       .catch((error) => { failure = error; })

@@ -50,6 +50,7 @@ const { ChatterboxEngine } = require("./chatterbox-engine.cjs");
 const { ChatterboxInstaller } = require("./chatterbox-installer.cjs");
 const { resolveChatterboxPaths } = require("./chatterbox-runtime.cjs");
 const { VoiceModelSelection, initialVoiceModel } = require("./voice-models.cjs");
+const { WaveformTelemetry } = require("./waveform-telemetry.cjs");
 const { listAudioSources } = require("./source-discovery.cjs");
 const { requireSourceMode } = require("./source-mode.cjs");
 const { createStateStore } = require("./state-store.cjs");
@@ -61,7 +62,7 @@ const { MIN_WINDOW_BOUNDS, readWindowState, trackWindowState } = require("./wind
 
 const PRODUCT_NAME = "Codex Persona Voice";
 const APP_ID = "dev.miuuyy.codexpersonavoice";
-const REPOSITORY_URL = "https://github.com/miuuyy/ChatGPT-Persona-Voice";
+const REPOSITORY_URL = "https://github.com/miuuyy/persona-voice";
 const X_URL = "https://x.com/miu21590";
 const WINDOWS_VB_CABLE_URL = "https://vb-audio.com/Cable/";
 const APP_ICON_PATH = path.join(__dirname, "..", "assets", "icon.png");
@@ -135,10 +136,21 @@ let relayPower = null;
 let platformAudioSetup = null;
 let windowsIntegration = null;
 let windowsRecoveryTimer = null;
+let waveformTelemetry = null;
 
 function send(channel, value) {
   if (mainWindow && !mainWindow.isDestroyed() && !mainWindow.webContents.isDestroyed()) {
     mainWindow.webContents.send(channel, value);
+  }
+}
+
+function observeWaveform(action) {
+  try { action(); }
+  catch (error) {
+    waveformTelemetry?.setActive(false);
+    logger?.warn("visualizer.telemetry_disabled", {
+      message: error instanceof Error ? error.message : String(error),
+    });
   }
 }
 
@@ -500,6 +512,10 @@ function registerIpc() {
   };
 
   handle("voice:snapshot", () => buildSnapshot());
+  handle("voice:visualizer-active", (_event, active) => {
+    if (!waveformTelemetry) throw new Error("Waveform telemetry is unavailable");
+    return waveformTelemetry.setActive(active);
+  });
   handle("voice:open-social", async (_event, target) => {
     const url = target === "github" ? REPOSITORY_URL : target === "x" ? X_URL : null;
     if (!url) throw new Error("Unknown social target");
@@ -1092,14 +1108,29 @@ async function start() {
     onEntry: () => { void broadcastSnapshot(); },
     onError: (error) => logger.error("history.record_failed", { message: error.message }),
   });
+  waveformTelemetry = new WaveformTelemetry({
+    publish: (value) => send("voice:visualizer-frame", value),
+  });
   runtime = new PipelineRuntime({
     ...adapters,
-    onOutputFrame: (outputFrame, sourceFrame) => historyRecorder.accept(outputFrame, sourceFrame),
+    onInputFrame: (sourceFrame, context) => observeWaveform(() => {
+      waveformTelemetry.acceptSource(sourceFrame, { atMs: context.acceptedAtMs });
+    }),
+    onOutputFrame: (outputFrame, sourceFrame, context) => {
+      historyRecorder.accept(outputFrame, sourceFrame);
+      observeWaveform(() => {
+        waveformTelemetry.acceptOutput(outputFrame, {
+          latencyMs: context.latencyMs,
+          inferenceMs: voiceEngine.diagnostics().lastInferenceMs,
+        });
+      });
+    },
   });
   stoppedMutationGate = new StoppedMutationGate(() => runtime.snapshot().state);
   runtime.on("changed", (value) => {
     refreshTray();
     if (value.state === "stopped") relayPower.stop();
+    if (value.state === "stopped") waveformTelemetry.reset();
     if (value.state === "stopped" &&
         windowsIntegration?.routeLifecycle.snapshot().errorCode === "source_process_exited") {
       scheduleWindowsStandbyRecovery();

@@ -33,10 +33,19 @@
     "collapse": "サイドバーを折りたたむ",
     "mainNavigation": "メインナビゲーション",
     "voice": "音声",
+    "visualizer": "ライブ",
     "history": "履歴",
     "settings": "設定",
     "updateTo": "v{version} に更新",
     "updating": "更新中…"
+  },
+  "visualizer": {
+    "source": "{app} · 入力",
+    "converted": "{voice} · 変換後",
+    "original": "元の音声",
+    "output": "変換後の音声",
+    "waiting": "音声を待機中",
+    "inference": "処理時間 {milliseconds} ms"
   },
   "onboarding": {
     "targetStep": "3 ステップ中 1",
