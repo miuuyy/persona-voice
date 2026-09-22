@@ -38,7 +38,7 @@ Persona Voice は、ChatGPT、Codex、Grok Bot の読み上げ音声を選んだ
 <tr>
 <td>
 
-https://github.com/user-attachments/assets/defa32ef-e47f-46c1-bacf-23c7b1ba8a52
+https://github.com/user-attachments/assets/b838c973-1d4d-427b-94e5-4855427ecb88
 
 </td>
 <td>
