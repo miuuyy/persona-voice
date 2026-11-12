@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/miuuyy/ChatGPT-Persona-Voice/actions/workflows/ci.yml"><img src="https://github.com/miuuyy/ChatGPT-Persona-Voice/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/miuuyy/persona-voice/actions/workflows/ci.yml"><img src="https://github.com/miuuyy/persona-voice/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/app-desktop-black?logo=electron" alt="デスクトップアプリ">
   <img src="https://img.shields.io/badge/inference-local-10a37f" alt="Local inference">
@@ -104,7 +104,7 @@ Persona Voice は、選択したアプリ、ローカルエンジン、出力経
 
 ### ダウンロードして使う
 
-[Releases](https://github.com/miuuyy/ChatGPT-Persona-Voice/releases/latest) から最新の macOS、
+[Releases](https://github.com/miuuyy/persona-voice/releases/latest) から最新の macOS、
 Windows、Linux 版をダウンロードできます。Windows の設定画面から公式
 [VB-CABLE](https://vb-audio.com/Cable/) を開き、別途インストールして Windows を再起動した後、
 アプリ内の音量ミキサー手順に従ってください。
@@ -133,8 +133,8 @@ Windows、Linux 版をダウンロードできます。Windows の設定画面�
 - Windows では、VB-Audio 公式の VB-CABLE ドライバも別途インストールする必要があります。
 
 ```bash
-git clone --recurse-submodules https://github.com/miuuyy/ChatGPT-Persona-Voice.git
-cd ChatGPT-Persona-Voice
+git clone --recurse-submodules https://github.com/miuuyy/persona-voice.git
+cd persona-voice
 bun install --frozen-lockfile
 bun run dev
 ```

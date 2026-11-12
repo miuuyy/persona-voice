@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/miuuyy/ChatGPT-Persona-Voice/actions/workflows/ci.yml"><img src="https://github.com/miuuyy/ChatGPT-Persona-Voice/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/miuuyy/persona-voice/actions/workflows/ci.yml"><img src="https://github.com/miuuyy/persona-voice/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/app-desktop-black?logo=electron" alt="桌面应用">
   <img src="https://img.shields.io/badge/inference-local-10a37f" alt="Local inference">
@@ -102,7 +102,7 @@ Persona Voice 会在所选应用、本地引擎和输出路由全部就绪后才
 
 ### 下载并使用
 
-从 [Releases](https://github.com/miuuyy/ChatGPT-Persona-Voice/releases/latest) 下载最新的 macOS、Windows 或 Linux 版本。
+从 [Releases](https://github.com/miuuyy/persona-voice/releases/latest) 下载最新的 macOS、Windows 或 Linux 版本。
 Windows 设置会打开官方 [VB-CABLE](https://vb-audio.com/Cable/) 下载页面；请单独安装、重启
 Windows，然后按应用内的音量合成器步骤操作。
 
@@ -127,8 +127,8 @@ Windows，然后按应用内的音量合成器步骤操作。
 - Windows 还需要单独安装 VB-Audio 官方 VB-CABLE 驱动。
 
 ```bash
-git clone --recurse-submodules https://github.com/miuuyy/ChatGPT-Persona-Voice.git
-cd ChatGPT-Persona-Voice
+git clone --recurse-submodules https://github.com/miuuyy/persona-voice.git
+cd persona-voice
 bun install --frozen-lockfile
 bun run dev
 ```

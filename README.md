@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/miuuyy/ChatGPT-Persona-Voice/actions/workflows/ci.yml"><img src="https://github.com/miuuyy/ChatGPT-Persona-Voice/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/miuuyy/persona-voice/actions/workflows/ci.yml"><img src="https://github.com/miuuyy/persona-voice/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/app-desktop-black?logo=electron" alt="Desktop app">
   <img src="https://img.shields.io/badge/inference-local-10a37f" alt="Local inference">
@@ -104,7 +104,7 @@ and [engine contract](docs/ENGINE_CONTRACT.md).
 
 ### Download and use
 
-Download the latest macOS, Windows, or Linux build from [Releases](https://github.com/miuuyy/ChatGPT-Persona-Voice/releases/latest).
+Download the latest macOS, Windows, or Linux build from [Releases](https://github.com/miuuyy/persona-voice/releases/latest).
 Windows setup links to the official [VB-CABLE](https://vb-audio.com/Cable/) download; install it
 separately, restart Windows, and follow the in-app Volume Mixer step.
 
@@ -129,8 +129,8 @@ Requirements:
 - Windows also requires the official VB-CABLE driver, installed separately from VB-Audio.
 
 ```bash
-git clone --recurse-submodules https://github.com/miuuyy/ChatGPT-Persona-Voice.git
-cd ChatGPT-Persona-Voice
+git clone --recurse-submodules https://github.com/miuuyy/persona-voice.git
+cd persona-voice
 bun install --frozen-lockfile
 bun run dev
 ```
